@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Estudiante;
+use App\Models\estudiante_detalle;
+
 
 class PagesController extends Controller
 {
@@ -12,7 +14,7 @@ class PagesController extends Controller
     }
 
     public function fnEstDetalle($id){
-        $xDetAlumnos = Estudiante::findOrFail($id); //Datos de BD por id
+        $xDetAlumnos = estudiante_detalle::findOrFail($id); //Datos de BD por id
         return view('Estudiante.pagDetalle', compact('xDetAlumnos'));
     }
 
