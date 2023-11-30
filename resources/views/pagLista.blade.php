@@ -20,8 +20,12 @@
             <tr>
                 <th scope="row">{{$item->id}}</th>
                 <td>{{ $item->codEst }}</td>
-                <td>{{ $item->apeEst }}, {{ $item->nomEst }}</td>
-                <td>@mdo</td>
+                <td>
+                    <a href="{{ route('Estudiante.xDetalle', $item->id) }}">
+                        {{ $item->apeEst }}, {{ $item->nomEst }}
+                    </a>
+                </td>
+                <td>A -- X</td>
             </tr>
             @endforeach
 
