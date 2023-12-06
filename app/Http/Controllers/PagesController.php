@@ -8,11 +8,39 @@ use App\Models\estudiante_detalle;
 
 class PagesController extends Controller
 {
-
+       
     public function fnIndex () {
         return view('welcome');
     }
 
+    public function fnRegistrar(Request $request){
+              
+        $request -> validate([
+            'codEst'=>'required',
+            'nomEst'=>'required',
+            'apeEst'=>'required',
+            'fnEst'=>'required',
+            'turMat'=>'required',
+            'semMat'=>'required',
+            'estMat'=>'required',
+        ]);
+
+        $nuevoEstudiante = new Estudiante;
+
+        $nuevoEstudiante->codEst = $request->codEst;
+        $nuevoEstudiante->nomEst = $request->nomEst;
+        $nuevoEstudiante->apeEst = $request->apeEst;
+        $nuevoEstudiante->fnEst = $request->fnEst;
+        $nuevoEstudiante->turMat = $request->turMat;
+        $nuevoEstudiante->semMat = $request->semMat;
+        $nuevoEstudiante->estMat = $request->estMat;
+
+        $nuevoEstudiante->save(); //guardar en BD
+
+        return back()->with('msj', 'Se registro con éxito...');
+    }
+    
+    
     public function fnEstDetalle($id){
         $xDetAlumnos = estudiante_detalle::findOrFail($id); //Datos de BD por id
         return view('Estudiante.pagDetalle', compact('xDetAlumnos'));
