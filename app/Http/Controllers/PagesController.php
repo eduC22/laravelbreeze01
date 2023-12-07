@@ -13,6 +13,29 @@ class PagesController extends Controller
         return view('welcome');
     }
 
+    public function fnEstActualizar($id){
+        $xActAlumnos = Estudiante::findOrFail($id); //datos de BD po id
+        return view('Estudiante.pagActualizar', compact('xActAlumnos'));
+    }
+
+    public function fnUpdate(Request $request, $id){
+
+        $xUpdateAlumnos = Estudiante::findOrFail($id);
+        
+        $xUpdateAlumnos -> codEst = $request -> codEst;
+        $xUpdateAlumnos -> nomEst = $request -> nomEst;
+        $xUpdateAlumnos -> apeEst = $request -> apeEst;
+        $xUpdateAlumnos -> fnEst = $request -> fnEst;
+        $xUpdateAlumnos -> turMat = $request -> turMat;
+        $xUpdateAlumnos -> semMat = $request -> semMat;
+        $xUpdateAlumnos -> estMat = $request -> estMat;
+
+        $xUpdateAlumnos -> save();   // Guardando en BD
+
+        return back()->with('msj', 'Se actualizo con éxito...');
+
+    }
+
     public function fnRegistrar(Request $request){
               
         $request -> validate([
@@ -46,8 +69,15 @@ class PagesController extends Controller
         return view('Estudiante.pagDetalle', compact('xDetAlumnos'));
     }
 
-    public function fnLista () {
-        $xAlumnos = Estudiante::all(); //Datos de BD
+    public function fnEliminar($id){
+        $deleteAlumno = Estudiante::findOrFail($id);
+        $deleteAlumno->delete();
+        return back()->with('msj', 'Se elimino con éxito...');
+    }
+
+    public function fnLista(){
+        //$xAlumnos = Estudiante::all(); //Datos de BD
+        $xAlumnos = Estudiante::paginate(4);   //Datos de BD
         return view('pagLista', compact('xAlumnos'));
     }
 

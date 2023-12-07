@@ -100,22 +100,30 @@
         <tbody>
             @foreach($xAlumnos as $item)
             <tr>
-                <th scope="row">{{$item->id}}</th>
+                <th scope="row">{{ $item->id }}</th>
                 <td>{{ $item->codEst }}</td>
                 <td>
-                    <a href="{{ route('Estudiante.xDetalle', $item->id) }}">
+                    <a href="{{ route('Estudiante.xDetalle', $item->id ) }}">
                         {{ $item->apeEst }}, {{ $item->nomEst }}
                     </a>
                 </td>
-                <td>A -- X
-
-
-
-                </td>
+                 <td>
+                    <form action="{{ route('Estudiante.xEliminar', $item->id) }}" method="post" class="d-inline">
+                        @method('DELETE')
+                        @csrf
+                        <button type="submit" class="btn btn-danger btn-sm">X</button>
+                    </form>
+                    <a class="btn btn-warning btn-sm" href="{{ route('Estudiante.xActualizar', $item->id ) }}">
+                        ...A
+                    </a>
+                </td> 
             </tr>
             @endforeach
 
         </tbody>
     </table>
+
+    {{ $xAlumnos->links() }}
+    
 @endsection
 
