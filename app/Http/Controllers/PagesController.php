@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Estudiante;
 use App\Models\estudiante_detalle;
+use App\Models\Seguimiento;
 
 
 class PagesController extends Controller
@@ -69,7 +70,12 @@ class PagesController extends Controller
         return view('Estudiante.pagDetalle', compact('xDetAlumnos'));
     }
 
-    public function fnEliminar($id){
+    public function fnSeguimiento(){
+        $xsegAlu = Seguimiento::all();
+        return view('Estudiante.pagSeguimiento', compact('xsegAlu'));
+    }
+
+        public function fnEliminar($id){
         $deleteAlumno = Estudiante::findOrFail($id);
         $deleteAlumno->delete();
         return back()->with('msj', 'Se elimino con éxito...');

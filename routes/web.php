@@ -16,6 +16,9 @@ Route::get('/galeria/{numero?}', [PagesController::class, 'fnGaleria']) -> where
 
 Route::get('/lista', [PagesController::class, 'fnLista']) -> name('xLista');
 
+Route::get('/Seguimiento', [PagesController::class, 'fnSeguimiento']) -> name('xsegAlu');
+
+
 //UDDATE
 Route::get('/actualizar/{id}', [PagesController::class, 'fnEstActualizar']) -> name('Estudiante.xActualizar'); //paso 1
 Route::put('/actualizar/{id}', [PagesController::class, 'fnUpdate']) -> name('Estudiante.xUpdate'); // paso 2
